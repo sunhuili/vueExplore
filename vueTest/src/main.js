@@ -6,12 +6,14 @@ import router from './router'
 import store from './store/vueStore.js'
 import axios from './api/axios.js'
 import flexible from './js/global/flexible.js'
+import dialog from '@/plugin/dialog'
 
 Vue.config.productionTip = false
 
 Main();
 function Main() {
 	Vue.prototype.$axios = axios
+	Vue.prototype.$dialog = dialog
 	flexible();
 	/* eslint-disable no-new */
 	new Vue({

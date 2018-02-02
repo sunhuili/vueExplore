@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from '@/view/home'
+
+import mainRoutes from './modules/main.js'
 
 Vue.use(Router)
 
+let routes = mainRoutes.concat();
+
+let base = '/';
+
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: home
-    }
-  ]
+	base,
+  routes,
 })

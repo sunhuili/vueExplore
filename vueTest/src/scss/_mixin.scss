@@ -1,0 +1,6 @@
+/**样式属性补前缀**/
+//display属性补前缀
+@mixin display($type){
+	display: $type;
+	display: -webkit-#{$type};
+}
