@@ -5,15 +5,26 @@ axios.defaults.timeout = 5000;
 axios.defaults.baseURL = '/';//项目中请求处理文件的路径
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
-/**请求拦截
-  *1、请求配置正确(符合axios的规范)
-    正常发请求post、request.data
-    post请求的request.data序列化处理
-  *2、请求配置错误(不符合axios的规范)
-    不发请求
+/**接口拦截
+  axios情况分类：
+    请求
+        --失败：【前端没发请求】
+        --成功：【前端发出请求】
+    响应
+        --失败：【后端没在限定情况下接收到请求并回应】
+        --成功
+              --错误：【后端响应不符合接口规则】
+              --正确：【后端响应正确】
+  axios情况处理：
+    1、请求成功：发送请求
+    2、响应正确：resolve(response.data)
+
+    1、请求失败：reject(`请求失败：${error}`)
+    2、响应失败：reject(`响应失败：${error.message}`)
+    3、响应错误：reject(`响应错误：接口对接失败`)
   **/
-axios.interceptors.request.use(function(request){
-  if(request.method == 'post'){//post请求参数序列化处理
+axios.interceptors.request.use(request=>{
+  if(request.method == 'post'){
     for(var item in request.data){
       if(typeof (request.data[item]) === 'object'){
         request.data[item] = JSON.stringify(request.data[item]);
@@ -22,42 +33,35 @@ axios.interceptors.request.use(function(request){
     request.data = qs.stringify(request.data);
   }
   return request;
-},function(error){
-  console.log('请求错误：' + error);
+},error=>{
+  let errorMsg = `请求失败：${error}`;
+  return Promise.reject(errorMsg);
 });
-
-/**响应拦截
-  *1、后端正常响应（成功或失败）：
-    resolve(data)
-    data:{Tag,Result,Message}
-  *2、后端响应失败（没有正常收到后端返回值）
-    reject(error)
-    error:浏览器响应失败返回值，包括code、message
-  **/
-axios.interceptors.response.use(function(response){
+axios.interceptors.response.use(response=>{
   if(!response.data){
-    console.log('请求失败，没有返回数据');
+    let errorMsg = '响应错误：接口对接失败';
+    return Promise.reject(errorMsg);
   }else{
-  	try{//请求成功，反序列化处理；
-  		response.data = JSON.parse(response.data);
-  	}catch(e){}
+    try{
+      response.data = JSON.parse(response.data);
+    }catch(e){}
+    return response.data;
   }
-  return response.data;
-},function(error){
-  let errorMsg = error;
+},error=>{
+  let errorMsg = '响应失败：';
   if(error.message.indexOf('timeout') > -1){
-    errorMsg = '请求超时';
+    errorMsg += '请求超时';
   }else{
     switch(error.message){
       case 'Network Error':
-        errorMsg = '网络无法连接';
+        errorMsg += '网络无法连接';
         break;
       default:
+        errorMsg += error.message;
         break;
     }
   }
-  console.log('响应失败：' + errorMsg);
-  return Promise.reject(error);
+  return Promise.reject(errorMsg);
 })
 
 export default axios;
