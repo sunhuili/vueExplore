@@ -1,10 +1,28 @@
-//主题尺寸 -----------
-$screen-space: .8rem;//屏幕间距
+/*-------------------全局尺寸----------------------*/
+$gHeight-head: 2rem;//顶部高度
+$gSpace-screen: .8rem;//屏幕间距
+$gSpace-content: .5rem;//内容边距
 
-//主题色 ------------
-$theme-color-blue: #5851FF;
 
-$theme-color-black: #333333;
-$theme-color-gray:  #AAAAAA;
-$theme-color-lightGray: #EEEEEE;
-$theme-color-grayWhite: #FBFBFB;
+/*-------------------全局配色----------------------*/
+//主色-应用中出现最频繁的颜色
+$gColor-main: #3f51b5;//蓝色rgb(63,81,181)
+$gColor-main-light: #c5cae9;//浅蓝色rgb(197,202,233)
+$gColor-main-dark: #303f9f;//深蓝色rgb(48,63,159)
+
+//辅助色-用于强调UI中的选择部分，可以是和主色互补，也可以是和主色类似的
+$gColor-second: #ff4081;//粉红色rgb(255,64,129)
+$gColor-second-light: #ff80ab;//浅粉色rgb(255,128,171)
+$gColor-second-dark: #f50057;//深红色rgb(245,0,87)
+
+//点缀色-
+$gColor-accent: #FCFF00;
+
+//文本色
+$gColor-text: #333333;//黑色rgb(51,51,51)
+$gColor-text-main: #ffffff;//白色rgb(255,255,255)
+
+//阴影色-分割
+$gColor-shadow: #A0A0A0;//灰色rgb(160,160,160)
+$gColor-shadow-light: #F0F0F0;//浅灰色rgb(240,240,240)
+$gColor-shadow-dark: #5B5B5B;//深灰色rgb(91,91,91)
