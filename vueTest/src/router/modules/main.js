@@ -18,6 +18,9 @@ export default [
   },
   {//404
     path: '*',
+    meta: {
+      hidden: true,
+    },
     beforeEnter(to,from,next){
       next({path: 'notFound', query: {errorPath: to.path}});
     }

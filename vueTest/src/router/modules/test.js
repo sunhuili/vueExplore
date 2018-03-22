@@ -14,7 +14,7 @@ export default [
         meta: {
           testName: 'dialog',
         }
-      }
+      },
     ],
   },
 ]
