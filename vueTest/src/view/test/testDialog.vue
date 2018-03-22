@@ -116,8 +116,8 @@
 <style lang="scss" scoped="">
   @import '~scss/_variable.scss';
   .u-item{
-    border-top: 2px solid $gColor-shadow-light;
-    background: $gColor-shadow;
+    border-top: 2px solid $gColor-gray-light;
+    background: $gColor-gray;
     color: $gColor-text-main;
     text-align: left;
     padding: $gSpace-content;

@@ -6,11 +6,6 @@ export default [
     name: 'home',
     component: _import('home'),
   },
-  {//测试页面
-    path: '/ceshi',
-    name: 'ceshi',
-    component: _import('ceshi'),
-  },
   {//404页面
     path: '/notFound',
     name: 'notFound',

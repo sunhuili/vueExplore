@@ -15,6 +15,14 @@ export default [
           testName: 'dialog',
         }
       },
+      {
+        path: 'testCss',
+        name: 'testCss',
+        component: _import('test/testCss'),
+        meta: {
+          testName: 'css',
+        }
+      },
     ],
   },
 ]
