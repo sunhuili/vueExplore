@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 水平居中 -->
     <div class="m-css m-css-1">
       <div class="m-title">水平居中</div>
       <div class="m-body">
@@ -17,6 +18,7 @@
         </div>
       </div>
     </div>
+    <!-- 垂直居中 -->
     <div class="m-css m-css-2">
       <div class="m-title">垂直居中</div>
       <div class="m-body">
@@ -31,6 +33,24 @@
         </div>
         <div class="u-item u-item-3">
           <div>块级元素</div>
+        </div>
+      </div>
+    </div>
+    <!-- 浮动元素 -->
+    <div class="m-css m-css-3">
+      <div class="m-title">浮动元素</div>
+      <div class="m-body">
+        <!-- 浮动元素性质 -->
+        <div class="u-item u-item-1">
+          <div class="float">浮动元素脱离正常文档流</div>
+        </div>
+        <div class="u-item u-item-2">
+          <div class="float">浮动元素</div>
+          <div class="next">浮动元素后面的块级元素 内容向浮动元素的外边距靠齐，边框和背景忽略浮动元素向上一个非浮动元素靠齐</div>
+        </div>
+        <div class="u-item u-item-3">
+          <div class="float">浮动元素</div>
+          <span class="next">浮动元素后面的内联元素 向浮动元素的外边距靠齐</span>
         </div>
       </div>
     </div>
@@ -162,4 +182,40 @@
     }
   }
   //居中方式总结：1、主要是flexbox、transform、margin、absolute
+
+  //浮动元素
+  .m-css-3{
+    .u-item-1{
+      background: $gColor-second-light;
+      padding: 2rem;
+      .float{
+        float: left;
+        background: $gColor-second;
+      }
+    }
+    .u-item-2{
+      background: $gColor-second-light;
+      padding: 2rem;
+      .float{
+        float: left;
+        background: $gColor-second;
+      }
+      .next{
+        background: $gColor-main-light;
+        border-radius: .5rem;
+      }
+    }
+    .u-item-3{
+      background: $gColor-second-light;
+      padding: 2rem;
+      .float{
+        float: left;
+        background: $gColor-second;
+      }
+      .next{
+        background: $gColor-main-light;
+        border-radius: .5rem;
+      }
+    }
+  }
 </style>
