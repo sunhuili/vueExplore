@@ -23,6 +23,14 @@ export default [
           testName: 'css',
         }
       },
+      {
+        path: 'testCtxGif',
+        name: 'testCtxGif',
+        component: _import('test/testCtxGif'),
+        meta: {
+          testName: 'ctxGif',
+        }
+      },
     ],
   },
 ]
