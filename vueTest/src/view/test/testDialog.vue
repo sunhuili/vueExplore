@@ -60,7 +60,7 @@
     methods: {
       showDialog(key) {
         let showText = this.dialogList[key].text;
-        switch(key){
+        switch(key) {
           case 'alert':
             let alertBox = this.$dialog.alert(showText);
             // // 1、测试代码关闭alert

@@ -2,11 +2,11 @@ import Vue from 'vue'
 import confirm from './confirm.vue'
 
 let dialogContainer = document.body;
-export default function showConfirm(text){
+export default function showConfirm(text) {
 	let vm = null;
 	let exec = new Promise((resolve,reject)=>{
 		let confirmOptions = {
-			data:function(){
+			data:function() {
 				return {
 					text: text,
 				}
@@ -28,7 +28,7 @@ export default function showConfirm(text){
 	return {vm,exec};
 }
 //删除组件vm（从文本流中移除，并在vue中销毁）
-function dialogClose(vm){
+function dialogClose(vm) {
 	dialogContainer.removeChild(vm.$el);
 	vm.$destroy();
 }

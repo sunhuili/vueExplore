@@ -47,7 +47,7 @@ import confirm from './confirm/index.js'
 	},
 	**/
 let dialogContainer = document.body
-function close(vm){
+function close(vm) {
 	dialogContainer.removeChild(vm.$el);
 	vm.$destroy();
 }

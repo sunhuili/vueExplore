@@ -24,9 +24,9 @@ axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;char
     3、响应错误：reject(`响应错误：接口对接失败`)
   **/
 axios.interceptors.request.use(request=>{
-  if(request.method == 'post'){
-    for(var item in request.data){
-      if(typeof (request.data[item]) === 'object'){
+  if(request.method == 'post') {
+    for(var item in request.data) {
+      if(typeof (request.data[item]) === 'object') {
         request.data[item] = JSON.stringify(request.data[item]);
       }
     }
@@ -38,21 +38,21 @@ axios.interceptors.request.use(request=>{
   return Promise.reject(errorMsg);
 });
 axios.interceptors.response.use(response=>{
-  if(!response.data){
+  if(!response.data) {
     let errorMsg = '响应错误：接口对接失败';
     return Promise.reject(errorMsg);
   }else{
     try{
       response.data = JSON.parse(response.data);
-    }catch(e){}
+    }catch(e) {}
     return response.data;
   }
 },error=>{
   let errorMsg = '响应失败：';
-  if(error.message.indexOf('timeout') > -1){
+  if(error.message.indexOf('timeout') > -1) {
     errorMsg += '请求超时';
   }else{
-    switch(error.message){
+    switch(error.message) {
       case 'Network Error':
         errorMsg += '网络无法连接';
         break;

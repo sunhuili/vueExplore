@@ -28,7 +28,7 @@
       this.drawImg();
     },
     methods: {
-      drawImg(){
+      drawImg() {
         let ctx = this.gifCtx;
         let img = this.gifImg;
         ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
@@ -37,10 +37,10 @@
         }
         // requestAnimationFrame(this.drawImg);
       },
-      loadImage(src){
+      loadImage(src) {
         return new Promise((resolve,reject)=>{
           let img = new Image();
-          img.onload = function(){
+          img.onload = function() {
             resolve(img);
           }
           //数据源是base64

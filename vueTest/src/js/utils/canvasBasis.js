@@ -7,7 +7,7 @@
       color：颜色
       lineWidth：线宽
   **/
-export function drawCtxLine(ctx,point1,point2,config){
+export function drawCtxLine(ctx,point1,point2,config) {
   ctx.save();
   //样式配置
   if (config) {

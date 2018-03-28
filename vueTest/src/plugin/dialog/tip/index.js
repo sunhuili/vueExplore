@@ -3,11 +3,11 @@ import tip from './tip.vue'
 
 //text最长30字符
 let dialogContainer = document.body;
-export default function showTip(text,time=2){
+export default function showTip(text,time=2) {
 	let vm = null;
 	let exec = new Promise((resolve,reject)=>{	
 		let tipOptions = {
-			data:function(){
+			data:function() {
 				return {
 					text,
 					time,
@@ -30,7 +30,7 @@ export default function showTip(text,time=2){
 	return {vm,exec};
 }
 //删除组件vm（从文本流中移除，并在vue中销毁）
-function dialogClose(vm){
+function dialogClose(vm) {
 	dialogContainer.removeChild(vm.$el);
 	vm.$destroy();
 }

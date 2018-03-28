@@ -16,7 +16,7 @@ export default [
     meta: {
       hidden: true,
     },
-    beforeEnter(to,from,next){
+    beforeEnter(to,from,next) {
       next({path: 'notFound', query: {errorPath: to.path}});
     }
   },
