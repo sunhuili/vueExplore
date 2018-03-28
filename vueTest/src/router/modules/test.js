@@ -31,6 +31,14 @@ export default [
           testName: 'ctxGif',
         }
       },
+      {
+        path: 'testCanvasBasis',
+        name: 'testCanvasBasis',
+        component: _import('test/testCanvasBasis'),
+        meta: {
+          testName: 'canvasBasis',
+        }
+      },
     ],
   },
 ]
