@@ -25,7 +25,7 @@ module.exports = {
   rules: {
     //以下为空格相关规则
     'no-irregular-whitespace': 2,//禁止无效或不规则的空白
-    'no-mixed-spaces-and-tabs': 2,//禁止空格和tap的混合缩进
+    'no-mixed-spaces-and-tabs': 2,//禁止空格和tab的混合缩进
     'no-multi-spaces': 2,//禁止出现多个空格
     'no-regex-spaces': 2,//禁止正则表达式字面量中出现多个空格
     'no-spaced-func': 2,//调用函数时，函数名和括号之间不能有空格

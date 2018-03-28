@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import {drawCtxLine} from '@/js/utils/canvasBasis.js';
+  import {drawCtxLine,drawCtxText,drawCtxCicle,drawCtxImage} from '@/js/utils/canvasBasis.js';
   export default {
     name: 'testCanvasBasis',
     data() {
@@ -28,13 +28,49 @@
     },
     methods: {
       drawCanvas() {
+        this.testLine();
+        this.testText();
+        this.testCicle();
+        this.testImage();
+      },
+      testLine() {
         let point1 = {x: 0, y: 0},
-          point2 = {x: this.width/2, y: this.width/2},
+          point2 = {x: this.width, y: this.width},
           config = {
-            color: `rgba(0, 234, 178, .8)`,
-            lineWidth: 4,
+            color: `rgba(0, 234, 178, 1)`,
+            lineWidth: 1,
           };
         drawCtxLine(this.ctx, point1, point2, config);
+      },
+      testText() {
+        let text = '画文本',
+          point = {x: 0, y: 0},
+          config = {
+            color: `rgba(123, 55, 7, .5)`,
+            font: '12px Calibri',
+            pointPlace: {
+              x: 'start',
+              y: 'start',
+            }
+          };
+        drawCtxText(this.ctx, text, point, config);
+      },
+      testCicle() {
+        let origin = {x: 30, y: 30},
+          radius = 30,
+          angle1 = 0,
+          angle2 = Math.PI/2,
+          config = {
+            color: `rgba(43,209,12,1)`,
+            anticlockwise: true,
+          };
+        drawCtxCicle(this.ctx, origin, radius, angle1, angle2, config);
+      },
+      testImage() {
+        let src = 'static/images/loading.gif',
+          point = {x: 30, y: 30},
+          config = {};
+        drawCtxImage(this.ctx, src, point, config);
       },
     },
   }
