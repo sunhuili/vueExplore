@@ -141,24 +141,31 @@ export function drawCtxImage(ctx, src, point, config) {
 //加载图片，兼容base64、dataUrl、图片链接（禁止跨域的跨域图片不能用）
 function loadImage(src) {
   return new Promise((resolve,reject) => {
-    let img = new Image();
-    img.onload = function() {
-      resolve(img);
-    }
-    //数据源是base64
-    if (src.indexOf('data:image') === 0) {
-      img.src = src;
+    if (typeof(src) === 'object') {
+      src.onload = () => {
+        resolve(src);
+      }
     }
     else{
-      //非dataUrl，且不带参
-      if (src.indexOf('data:image') !== 0 && src.indexOf('?') === -1) {
-        img.src = src + '?' + new Date().getTime();
+      let img = new Image();
+      img.onload = function() {
+        resolve(img);
       }
-      //其他情况（dataUrl正常使用，带参的没办法处理）
-      else{
+      //数据源是base64
+      if (src.indexOf('data:image') === 0) {
         img.src = src;
       }
-      img.crossOrigin = '';
+      else{
+        //非dataUrl，且不带参
+        if (src.indexOf('data:image') !== 0 && src.indexOf('?') === -1) {
+          img.src = src + '?' + new Date().getTime();
+        }
+        //其他情况（dataUrl正常使用，带参的没办法处理）
+        else{
+          img.src = src;
+        }
+        img.crossOrigin = '';
+      }
     }
   })
 }
