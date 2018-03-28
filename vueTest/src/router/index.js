@@ -13,6 +13,6 @@ let routes = mainRoutes.concat(
 let base = '/';
 
 export default new Router({
-	base,
+  base,
   routes,
 })

@@ -42,11 +42,11 @@
     align-items: center;
     justify-content: center;
     .bottom-item{
-			width: 100%;
-			height: 100%;
-			@include display(flex);
-			align-items: center;
-			justify-content: center;
-		}
+      width: 100%;
+      height: 100%;
+      @include display(flex);
+      align-items: center;
+      justify-content: center;
+    }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-	<div>
+  <div>
     <div class="m-route m-route-1">
       <div class="u-route u-route-1"
         v-if="!routeFirst.meta || !routeFirst.meta.hidden"
@@ -15,23 +15,23 @@
         </div>
       </div>
     </div>
-	</div>
+  </div>
 </template>
 
 <script>
   import router from '@/router'
-	export default {
-		name: 'home',
+  export default {
+    name: 'home',
     data() {
       return{
         routes: router.options.routes,
       }
     },
-	}
+  }
 </script>
 
 <style lang="scss" scoped="">
-	@import '~scss/_variable.scss';
+  @import '~scss/_variable.scss';
   .m-route{
     background: $gColor-main;
     color: $gColor-text-main;

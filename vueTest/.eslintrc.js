@@ -23,6 +23,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    'no-mixed-spaces-and-tabs': 2,
     'space-before-blocks': [2, 'always'],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0

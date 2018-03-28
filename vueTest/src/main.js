@@ -12,15 +12,15 @@ Vue.config.productionTip = false
 
 Main();
 function Main() {
-	Vue.prototype.$axios = axios
-	Vue.prototype.$dialog = dialog
-	flexible();
-	/* eslint-disable no-new */
-	new Vue({
-	  el: '#app',
-	  router,
-	  store,
-	  template: '<App/>',
-	  components: { App }
-	})
+  Vue.prototype.$axios = axios
+  Vue.prototype.$dialog = dialog
+  flexible();
+  /* eslint-disable no-new */
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    template: '<App/>',
+    components: { App }
+  })
 }

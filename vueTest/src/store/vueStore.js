@@ -12,10 +12,10 @@ let mutations = {}
 let actions = {}
 
 export default new Vuex.Store({
-	strict: true,
-	state,
-	getters,
-	mutations,
-	actions,
-	modules: {}
+  strict: true,
+  state,
+  getters,
+  mutations,
+  actions,
+  modules: {}
 })

@@ -5,12 +5,12 @@
         <div class = "box-content">{{text}}</div>
         <div class="box-bottom">
           <div class="bottom-item"
-          	@click="$emit('clickBtn','cancel')">
-          	取消
+            @click="$emit('clickBtn','cancel')">
+            取消
           </div>
           <div class="bottom-item"
-          	@click="$emit('clickBtn','ok')">
-          	确认
+            @click="$emit('clickBtn','ok')">
+            确认
           </div>
         </div>
       </div>
@@ -32,5 +32,5 @@
 </script>
 
 <style lang="scss" scoped>
-	@import '../dialog.scss';
+  @import '../dialog.scss';
 </style>
