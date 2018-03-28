@@ -23,8 +23,18 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    'no-mixed-spaces-and-tabs': 2,
-    'space-before-blocks': [2, 'always'],
+    //以下为空格相关规则
+    'no-irregular-whitespace': 2,//禁止无效或不规则的空白
+    'no-mixed-spaces-and-tabs': 2,//禁止空格和tap的混合缩进
+    'no-multi-spaces': 2,//禁止出现多个空格
+    'no-regex-spaces': 2,//禁止正则表达式字面量中出现多个空格
+    'no-spaced-func': 2,//调用函数时，函数名和括号之间不能有空格
+    'no-trailing-spaces': 2,//禁用行尾空白
+    'no-whitespace-before-property': 2,//禁止点号周围或对象属性之前的左括号前出现空白
+    'space-before-blocks': [2, 'always'],//语句块前必须有空格
+    'space-before-function-paren': [2, 'never'],//函数名和参数左括号间不允许有空格
+    'space-in-parens': [2, 'never'],//小括号内不允许有空格（左括号右边和右括号左边）
+    //以下为默认规则配置
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }

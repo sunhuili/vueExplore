@@ -3,7 +3,7 @@ function flexible() {
   // let evt = "onorientationchange" in window ? "orientationchange" : "resize"
   let evt = 'resize'
   var docEle = document.documentElement
-  let lastWidth = 0  
+  let lastWidth = 0
 
   let resizefun = function() {
     //上一次resize的屏幕宽度如果和这次相等，则视为没有变动

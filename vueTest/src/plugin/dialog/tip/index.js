@@ -5,7 +5,7 @@ import tip from './tip.vue'
 let dialogContainer = document.body;
 export default function showTip(text,time=2) {
   let vm = null;
-  let exec = new Promise((resolve,reject)=>{  
+  let exec = new Promise((resolve,reject)=>{
     let tipOptions = {
       data:function() {
         return {
