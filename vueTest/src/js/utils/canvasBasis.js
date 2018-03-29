@@ -1,3 +1,17 @@
+/**转换点坐标
+  传参：origin,radius,angle
+    origin：基点
+    radius：相对基点的距离
+    angle：相对基点的角度（x正半轴顺时针一周Math.PI*2）
+  **/
+export function parseCtxPoint({origin = {x: 0, y: 0}, radius, angle}) {
+  let point = {
+    x: origin.x + radius*Math.cos(angle),
+    y: origin.y + radius*Math.sin(angle),
+  };
+  return point;
+}
+
 /**绘制线段
   传参：ctx,point1,point2,config
     ctx：ctx绘图对象
@@ -98,7 +112,7 @@ export function drawCtxText(ctx, text, point, config) {
     ctx：ctx绘图对象
     origin：圆心位置
     radius：圆半径
-    angle1：起点角度（x周正半轴为起点，顺时针角度）
+    angle1：起点角度（x周正半轴为起点，顺时针角度，一周Math.PI*2）
     angle2：中点角度
     config：圆弧样式
       color：颜色

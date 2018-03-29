@@ -13,6 +13,7 @@ let routes = mainRoutes.concat(
 let base = '/';
 
 export default new Router({
+  // mode: 'history',
   base,
   routes,
 })
