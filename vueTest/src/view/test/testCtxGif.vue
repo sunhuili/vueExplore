@@ -1,65 +1,65 @@
 <template>
   <div>
-    <canvas ref="ctxGif"></canvas>
+    <canvas ref="canvas"></canvas>
   </div>
 </template>
 
 <script>
+  import {parseCtxPoint, drawCtxLine} from '@/js/utils/canvasBasis.js'
   export default {
     name: 'testCtxGif',
     data() {
       return {
-        gifCtx: null,
-        gifImg: null,
+        ctxCanvas: null,
+        width: 375,
+        scale: 2,
+        num: 3,
+        gap: 0.03,
       }
     },
     mounted() {
-      let width = 375;
-      let scale = 2;
-      var canvas = this.$refs.ctxGif;
-      canvas.setAttribute('width', width*scale);
-      canvas.setAttribute('height', width*scale);
-      canvas.style.width = width + 'px';
-      canvas.style.height = width + 'px';
-      this.gifCtx = canvas.getContext('2d');
-      this.gifCtx.scale(scale, scale);
-      this.gifImg = new Image();
-      this.gifImg.src = 'static/images/gif/lyf1.gif';
-      this.drawImg();
+      var canvas = this.$refs.canvas;
+      canvas.setAttribute('width', this.width*this.scale);
+      canvas.setAttribute('height', this.width*this.scale);
+      canvas.style.width = this.width + 'px';
+      canvas.style.height = this.width + 'px';
+      this.ctxCanvas = canvas.getContext('2d');
+      this.ctxCanvas.scale(this.scale, this.scale);
+      this.ctxCanvas.translate(this.width/2, this.width/2);
+      this.drawCanvas();
     },
     methods: {
-      drawImg() {
-        let ctx = this.gifCtx;
-        let img = this.gifImg;
-        ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height);
-        img.onload = ()=>{
-          ctx.drawImage(img,0,0);
+      drawCanvas() {
+        let ctx = this.ctxCanvas;
+        var center = this.width/2;
+        if(this.num > 20 || this.num < 3){
+          this.gap -= this.gap*2;
         }
-        // requestAnimationFrame(this.drawImg);
+        this.num += this.gap;
+        ctx.clearRect(-center, -center, center*2, center*2);
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(-center, -center, center*2, center*2);
+        ctx.fillStyle = '#000';
+        ctx.font = '24px Avenir';
+        ctx.fillText(parseInt(this.num), 100, 100);
+        for(var i = 0; i < this.num; i++){//共this.num个点，两两相连
+          for(var j = 0; j < this.num; j++){
+            if(i != j){
+              let point1 = parseCtxPoint({
+                radius: center,
+                angle: Math.PI*2 * (i/this.num),
+              });
+              let point2 = parseCtxPoint({
+                radius: center,
+                angle: Math.PI*2 * (j/this.num),
+              });
+              let config = {color: '#856725'};
+              drawCtxLine(ctx, point1, point2, config);
+            }
+          }
+        }
+        setTimeout(this.drawCanvas, 20);
       },
-      loadImage(src) {
-        return new Promise((resolve,reject)=>{
-          let img = new Image();
-          img.onload = function() {
-            resolve(img);
-          }
-          //数据源是base64
-          if (src.indexOf('data:image') === 0) {
-            img.src = src;
-          }
-          else{
-            //非dataUrl，且不带参
-            if (src.indexOf('data:image') !== 0 && src.indexOf('?') === -1) {
-              img.src = src + '?' + new Date().getTime();
-            }
-            //其他情况（dataUrl正常使用，带参的没办法处理）
-            else{
-              img.src = src;
-            }
-            img.crossOrigin = '';
-          }
-        })
-      }
     },
   }
 </script>
