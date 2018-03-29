@@ -7,9 +7,9 @@
 
 <script>
   import {parseCtxPoint, drawCtxLine} from '@/js/utils/canvasBasis.js'
-  import '@/js/global/gif.js'
-  import gifWorker from '@/js/global/gif.worker.js'
-  // import 'static/js/gif.js'
+  // import '@/js/global/gif.js'
+  // import gifWorker from '@/js/global/gif.worker.js'
+  import 'static/js/gif.js'
   export default {
     name: 'testCtxGif',
     data() {
@@ -70,8 +70,8 @@
         let gif = new GIF({
           workers: 2,
           quality: 10,
-          // workerScript: 'static/js/gif.worker.js',
-          myWorker: gifWorker,
+          workerScript: 'static/js/gif.worker.js',
+          // myWorker: gifWorker,
         });
         for(let i = 0; i < 4; i++){
           gif.addFrame(this.$refs.canvas, {
