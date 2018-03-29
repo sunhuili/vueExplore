@@ -1,11 +1,15 @@
 <template>
   <div>
     <canvas ref="canvas"></canvas>
+    <img ref="output" src="" alt="">
   </div>
 </template>
 
 <script>
   import {parseCtxPoint, drawCtxLine} from '@/js/utils/canvasBasis.js'
+  import '@/js/global/gif.js'
+  import gifWorker from '@/js/global/gif.worker.js'
+  // import 'static/js/gif.js'
   export default {
     name: 'testCtxGif',
     data() {
@@ -27,6 +31,8 @@
       this.ctxCanvas.scale(this.scale, this.scale);
       this.ctxCanvas.translate(this.width/2, this.width/2);
       this.drawCanvas();
+
+      this.renderGif();
     },
     methods: {
       drawCanvas() {
@@ -59,6 +65,39 @@
           }
         }
         setTimeout(this.drawCanvas, 20);
+      },
+      renderGif() {
+        let gif = new GIF({
+          workers: 2,
+          quality: 10,
+          // workerScript: 'static/js/gif.worker.js',
+          myWorker: gifWorker,
+        });
+        for(let i = 0; i < 4; i++){
+          gif.addFrame(this.$refs.canvas, {
+            delay: 200,
+          });
+        }
+        gif.on('start', () => {
+          console.log('start');
+        });
+        gif.on('progress', (data) => {
+          console.log('progress', data);
+        });
+        gif.on('newListener', () => {
+          console.log('newListener');
+        });
+        gif.on('removeListener', () => {
+          console.log('removeListener');
+        });
+        gif.on('abort', () => {
+          console.log('abort');
+        });
+        gif.on('finished', blob => {
+          console.log('finished',blob);
+          this.$refs.output.src = URL.createObjectURL(blob);
+        });
+        gif.render();
       },
     },
   }

@@ -411,7 +411,17 @@
             return function(i) {
               var worker;
               _this.log("spawning worker " + i);
-              worker = new Worker(_this.options.workerScript);
+              //shl-修改1开始：支持worker-loader方式加载worker脚本
+              //原版
+              // worker = new Worker(_this.options.workerScript);
+              //修改版
+              if (_this.options.myWorker) {
+                worker = new _this.options.myWorker();
+              }
+              else{
+                worker = new Worker(_this.options.workerScript);
+              }
+              //shl-修改1结束：支持worker-loader方式加载worker脚本
               worker.onmessage = function(event) {
                 _this.activeWorkers.splice(_this.activeWorkers.indexOf(worker), 1);
                 _this.freeWorkers.push(worker);

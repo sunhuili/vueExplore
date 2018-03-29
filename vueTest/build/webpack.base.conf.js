@@ -81,7 +81,11 @@ module.exports = {
       {
         test: /\.scss$/,
         use: ['vue-style-loader', 'css-loader', 'scss-loader']
-      }
+      },
+      {
+        test: /\.worker\.js$/,
+        use: { loader: 'worker-loader' }
+      },
     ]
   },
   node: {
