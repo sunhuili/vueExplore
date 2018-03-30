@@ -6,19 +6,17 @@
 </template>
 
 <script>
-  import {parseCtxPoint, drawCtxLine} from '@/js/utils/canvasBasis.js'
-  // import '@/js/global/gif.js'
-  // import gifWorker from '@/js/global/gif.worker.js'
+  import {parseCtxPoint, drawCtxLine, drawCtxText} from '@/js/utils/canvasBasis.js'
   import 'static/js/gif.js'
   export default {
     name: 'testCtxGif',
     data() {
       return {
         ctxCanvas: null,
-        width: 375,
+        width: 187.5,
         scale: 2,
         num: 3,
-        gap: 0.03,
+        gap: 0.3,
       }
     },
     mounted() {
@@ -45,10 +43,8 @@
         ctx.clearRect(-center, -center, center*2, center*2);
         ctx.fillStyle = '#fff';
         ctx.fillRect(-center, -center, center*2, center*2);
-        ctx.fillStyle = '#000';
-        ctx.font = '24px Avenir';
-        ctx.fillText(parseInt(this.num), 100, 100);
-        for(var i = 0; i < this.num; i++){//共this.num个点，两两相连
+        //共this.num个点，两两相连
+        for(var i = 0; i < this.num; i++){
           for(var j = 0; j < this.num; j++){
             if(i != j){
               let point1 = parseCtxPoint({
@@ -64,6 +60,17 @@
             }
           }
         }
+        let text = parseInt(this.num);
+        let point = {x: 0, y: 0};
+        let config = {
+          color: '#000',
+          font: '24px Avenir',
+          pointPlace: {
+            x: 'center',
+            y: 'center',
+          },
+        };
+        drawCtxText(ctx, text, point, config);
         setTimeout(this.drawCanvas, 20);
       },
       renderGif() {
@@ -71,30 +78,13 @@
           workers: 2,
           quality: 10,
           workerScript: 'static/js/gif.worker.js',
-          // myWorker: gifWorker,
         });
-        for(let i = 0; i < 4; i++){
+        for(let i = 0; i < 50; i++){
           gif.addFrame(this.$refs.canvas, {
-            delay: 200,
+            delay: 10,
           });
         }
-        gif.on('start', () => {
-          console.log('start');
-        });
-        gif.on('progress', (data) => {
-          console.log('progress', data);
-        });
-        gif.on('newListener', () => {
-          console.log('newListener');
-        });
-        gif.on('removeListener', () => {
-          console.log('removeListener');
-        });
-        gif.on('abort', () => {
-          console.log('abort');
-        });
         gif.on('finished', blob => {
-          console.log('finished',blob);
           this.$refs.output.src = URL.createObjectURL(blob);
         });
         gif.render();
