@@ -4,39 +4,23 @@ export default [
   {//首页
     path: '/test',
     name: 'test',
-    component: _import('layout/testLayout'),
-    redirect: '/test/testDialog',
+    component: _import('layout/test'),
+    redirect: '/test/css',
     children: [
       {
-        path: 'testDialog',
-        name: 'testDialog',
-        component: _import('test/testDialog'),
-        meta: {
-          testName: 'dialog',
-        }
-      },
-      {
-        path: 'testCss',
-        name: 'testCss',
-        component: _import('test/testCss'),
+        path: 'css',
+        name: 'css',
+        component: _import('test/css'),
         meta: {
           testName: 'css',
         }
       },
       {
-        path: 'testCtxGif',
-        name: 'testCtxGif',
-        component: _import('test/testCtxGif'),
+        path: 'ctxBasis',
+        name: 'ctxBasis',
+        component: _import('test/ctxBasis'),
         meta: {
-          testName: 'ctxGif',
-        }
-      },
-      {
-        path: 'testCanvasBasis',
-        name: 'testCanvasBasis',
-        component: _import('test/testCanvasBasis'),
-        meta: {
-          testName: 'canvasBasis',
+          testName: 'ctxBasis',
         }
       },
     ],

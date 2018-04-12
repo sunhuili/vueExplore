@@ -5,11 +5,17 @@ export default [
     path: '/',
     name: 'home',
     component: _import('home'),
+    meta: {
+      hidden: true,
+    },
   },
   {//404页面
     path: '/notFound',
     name: 'notFound',
     component: _import('notFound'),
+    meta: {
+      hidden: true,
+    },
   },
   {//404
     path: '*',
