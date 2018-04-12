@@ -12,7 +12,7 @@
 
 <script>
   export default {
-    name: 'testDialog',
+    name: 'dialog',
     data() {
       return {
         dialogList: {

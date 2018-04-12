@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  import {drawCtxLine,drawCtxText,drawCtxCicle,drawCtxImage} from '@/js/utils/canvasBasis.js';
+  import {drawCtxLine,drawCtxText,drawCtxCicle,drawCtxImage} from '@/js/utils/ctxBasis.js';
   export default {
-    name: 'testCanvasBasis',
+    name: 'ctxBasis',
     data() {
       return {
         ctx: null,

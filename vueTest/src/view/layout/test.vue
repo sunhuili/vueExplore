@@ -1,5 +1,5 @@
 <template>
-  <div class="p-testLayout">
+  <div class="g-page">
     <div class="g-head">测试-{{$route.meta.testName}}</div>
     <div class="g-body">
       <router-view></router-view>
@@ -9,13 +9,13 @@
 
 <script>
   export default {
-    name: 'testLayout',
+    name: 'test',
   }
 </script>
 
 <style lang="scss" scoped>
   @import "~scss/_variable.scss";
-  .p-testLayout{
+  .g-page{
     height: 100%;
   }
   .g-head{

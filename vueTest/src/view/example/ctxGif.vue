@@ -6,10 +6,10 @@
 </template>
 
 <script>
-  import {parseCtxPoint, drawCtxLine, drawCtxText} from '@/js/utils/canvasBasis.js'
+  import {parseCtxPoint, drawCtxLine, drawCtxText} from '@/js/utils/ctxBasis.js'
   import 'static/js/gif.js'
   export default {
-    name: 'testCtxGif',
+    name: 'ctxGif',
     data() {
       return {
         ctxCanvas: null,
