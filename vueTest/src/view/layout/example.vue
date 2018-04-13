@@ -1,6 +1,6 @@
 <template>
   <div class="g-page">
-    <div class="g-head">示例-{{$route.meta.testName}}</div>
+    <div v-if="false" class="g-head">示例-{{$route.meta.testName}}</div>
     <div class="g-body">
       <router-view></router-view>
     </div>
@@ -31,6 +31,6 @@
   .g-body{
     min-height: 100%;
     overflow: auto;
-    padding-top: $gHeight-head;
+    // padding-top: $gHeight-head;
   }
 </style>
