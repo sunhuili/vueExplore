@@ -25,36 +25,46 @@
         PIXI.utils.sayHello(type);
       },
       drawPIXI() {
+        //别名
+        let Application = PIXI.Application,
+            Container = PIXI.Container,
+            loader = PIXI.loader,
+            resources = PIXI.loader.resources,
+            TextureCache = PIXI.utils.TextureCache,
+            Sprite = PIXI.Sprite,
+            Rectangle = PIXI.Rectangle;
         //1、创建画布-并添加到dom上
-        let app = new PIXI.Application({
+        let app = new Application({
           width: window.innerWidth,
           height: window.innerHeight,
         })
         this.$refs.pixiArea.appendChild(app.view);
-        app.renderer.view.style.position = "absolute";
-        app.renderer.view.style.display = "block";
-        app.renderer.autoResize = true;
-        //2、PIXI加载图片
-        function loadSprite(url) {
-          return new Promise((resolve,reject) => {
-            if (PIXI.loader.resources[url]) {
-              resolve();
-            }
-            else{
-              PIXI.loader.add(url).load(() => {
-                resolve();
-              })
-            }
-          })
+        let renderer = app.renderer,
+            stage = app.stage;
+        renderer.view.style.position = "absolute";
+        renderer.view.style.display = "block";
+        renderer.autoResize = true;
+        //别名
+        //2、加载图片
+        try{
+          loader
+            .add('static/images/gif/lyf1.gif')
+            .add('static/images/game/sprites.png')
+            .load(() => {
+            setup();
+          });
         }
-        //2.1、创建精灵
-        createSprite();
-        function createSprite() {
-          loadSprite('static/images/gif/lyf1.gif').then(()=>{
+        catch(e){
+          setup();
+        }
+        function setup() {
+          //2.1、创建精灵
+          // createSprite();
+          function createSprite() {
             let lyf1 = new PIXI.Sprite(
               PIXI.loader.resources['static/images/gif/lyf1.gif'].texture
             );
-            app.stage.addChild(lyf1);
+            stage.addChild(lyf1);
             //定位
             lyf1.x = 96;
             lyf1.y = 96;
@@ -66,14 +76,24 @@
             lyf1.scale.set(0.5, 0.5);
             //显隐
             lyf1.visible = true;
-          })
-        }
-        //2.2、使用雪碧图
-        // createSprites();
-        function createSprites() {
-          loadSprite('assets/images/game/09.png').then(()=>{
-            console.log('ddd');
-          })
+            renderer.render(stage);
+          }
+          //2.2、雪碧图
+          createSprites();
+          function createSprites() {
+            //创建精灵 方式1-TextureCache
+            function getImg(hor, ver) {
+              let texture = TextureCache['static/images/game/sprites.png'];
+              let rectangle = new Rectangle(32*hor, 32*ver, 32, 32);
+              texture.frame = rectangle;
+              let img = new Sprite(texture);
+              img.x = 32*hor;
+              img.y = 32*ver;
+              return img;
+            }
+            stage.addChild(getImg(3, 2));
+            renderer.render(stage);
+          }
         }
       },
     },
