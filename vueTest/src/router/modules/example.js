@@ -23,6 +23,14 @@ export default [
           testName: 'ctxGif',
         }
       },
+      {
+        path: 'pixiHunter',
+        name: 'pixiHunter',
+        component: _import('example/pixiHunter'),
+        meta: {
+          testName: 'pixiHunter',
+        }
+      },
     ],
   },
 ]

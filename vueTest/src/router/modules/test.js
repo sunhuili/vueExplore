@@ -23,14 +23,6 @@ export default [
           testName: 'ctxBasis',
         }
       },
-      {
-        path: 'pixiTest1',
-        name: 'pixiTest1',
-        component: _import('test/pixiTest1'),
-        meta: {
-          testName: 'pixiTest1',
-        }
-      },
     ],
   },
 ]
