@@ -224,76 +224,54 @@
           state = play;
           //游戏开始
           function play(delta) {
-            //use the explorer's velocity to make it move
+            //移动探险家，并限定活动范围
             explorer.x += explorer.vx;
             explorer.y += explorer.vy;
-
-            //Contain the explorer inside the area of the dungeon
             contain(explorer, {x: 28, y: 10, width: 488, height: 480});
-            //contain(explorer, stage);
-
-            //Set `explorerHit` to `false` before checking for a collision
+            //移动怪物，并限定活动范围 and 检测碰撞
             let explorerHit = false;
-
-            //Loop through all the sprites in the `enemies` array
             blobs.forEach(function(blob) {
-
-              //Move the blob
               blob.y += blob.vy;
-
-              //Check the blob's screen boundaries
+              //限定怪物活动范围在地牢内
               let blobHitsWall = contain(blob, {x: 28, y: 10, width: 488, height: 480});
-
-              //If the blob hits the top or bottom of the stage, reverse
-              //its direction
+              //如果碰撞了上下边，则速度反向
               if (blobHitsWall === "top" || blobHitsWall === "bottom") {
                 blob.vy *= -1;
               }
-
-              //Test for a collision. If any of the enemies are touching
-              //the explorer, set `explorerHit` to `true`
+              //碰撞检测
               if(hitTestRectangle(explorer, blob)) {
                 explorerHit = true;
               }
             });
-
-            //If the explorer is hit...
+            //怪物碰撞处理
             if(explorerHit) {
-
-              //Make the explorer semi-transparent
+              //精灵半透明
               explorer.alpha = 0.5;
-
-              //Reduce the width of the health bar's inner rectangle by 1 pixel
+              //血条宽度减一
               healthBar.outer.width -= 1;
-
-            } else {
-
-              //Make the explorer fully opaque (non-transparent) if it hasn't been hit
+            }
+            else{
+              //血条不透明
               explorer.alpha = 1;
             }
-
-            //Check for a collision between the explorer and the treasure
+            //宝藏碰撞检测和处理
             if (hitTestRectangle(explorer, treasure)) {
-
-              //If the treasure is touching the explorer, center it over the explorer
+              //宝藏挂在探险家身上——探险家每次移动5，宝藏距探险家-8，所以每次探险家移动时，宝藏都会黏上去。
               treasure.x = explorer.x + 8;
               treasure.y = explorer.y + 8;
             }
-
-            //Does the explorer have enough health? If the width of the `innerBar`
-            //is less than zero, end the game and display "You lost!"
+            //检测血条，如果血条小于0，结束游戏，You lost!
             if (healthBar.outer.width < 0) {
               state = end;
               message.text = "You lost!";
             }
-
-            //If the explorer has brought the treasure to the exit,
-            //end the game and display "You won!"
+            //门碰撞检测和处理。如果探险家将宝藏带到出口处，结束游戏，You Win!
             if (hitTestRectangle(treasure, door)) {
               state = end;
               message.text = "You won!";
             }
           }
+          //限定精灵在container内，返回越界边
           function contain(sprite, container) {
             let collision = undefined;
             //Left
@@ -321,52 +299,32 @@
           }
           //碰撞检测
           function hitTestRectangle(r1, r2) {
-            //Define the variables we'll need to calculate
             let hit, combinedHalfWidths, combinedHalfHeights, vx, vy;
-
-            //hit will determine whether there's a collision
             hit = false;
-
-            //Find the center points of each sprite
+            //精灵中心坐标
             r1.centerX = r1.x + r1.width / 2;
             r1.centerY = r1.y + r1.height / 2;
             r2.centerX = r2.x + r2.width / 2;
             r2.centerY = r2.y + r2.height / 2;
-
-            //Find the half-widths and half-heights of each sprite
+            //精灵尺寸一半
             r1.halfWidth = r1.width / 2;
             r1.halfHeight = r1.height / 2;
             r2.halfWidth = r2.width / 2;
             r2.halfHeight = r2.height / 2;
-
-            //Calculate the distance vector between the sprites
+            //精灵中心间距
             vx = r1.centerX - r2.centerX;
             vy = r1.centerY - r2.centerY;
-
-            //Figure out the combined half-widths and half-heights
+            //不碰撞精灵 中心最小间距
             combinedHalfWidths = r1.halfWidth + r2.halfWidth;
             combinedHalfHeights = r1.halfHeight + r2.halfHeight;
-
-            //Check for a collision on the x axis
-            if (Math.abs(vx) < combinedHalfWidths) {
-
-              //A collision might be occuring. Check for a collision on the y axis
-              if (Math.abs(vy) < combinedHalfHeights) {
-
-                //There's definitely a collision happening
-                hit = true;
-              } else {
-
-                //There's no collision on the y axis
-                hit = false;
-              }
-            } else {
-
-              //There's no collision on the x axis
+            //判断是否碰撞
+            if (Math.abs(vx) < combinedHalfWidths
+              && Math.abs(vy) < combinedHalfHeights) {
+              hit = true;
+            }
+            else{
               hit = false;
             }
-
-            //`hit` will be either `true` or `false`
             return hit;
           };
           //游戏结束
@@ -374,29 +332,11 @@
             gameScene.visible = false;
             gameOverScene.visible = true;
           }
-          app.ticker.add(delta => gameLoop(delta));
+          //渲染更新，add为tick事件注册一个处理程序
+          //除非被移除或停止，否则将持续调用。
+          app.ticker.add(delta => state(delta));
           function gameLoop(delta){
-            //Update the current game state:
             state(delta);
-          }
-
-          function createSprite() {
-            let lyf1 = new PIXI.Sprite(
-              PIXI.loader.resources['static/images/gif/lyf1.gif'].texture
-            );
-            app.stage.addChild(lyf1);
-            //定位
-            lyf1.x = 96;
-            lyf1.y = 96;
-            //旋转
-            lyf1.rotation = Math.PI;//顺时针旋转;一周Math.PI * 2
-            //锚点
-            lyf1.anchor.set(0.5, 0.5);
-            //缩放
-            lyf1.scale.set(0.5, 0.5);
-            //显隐
-            lyf1.visible = true;
-            app.renderer.render(app.stage);
           }
         }
       },
