@@ -1,5 +1,5 @@
 <template>
-  <div class="module-dialog">
+  <div class="module-msgBox">
     <div class="box-mask" @click="$emit('close')">
       <div class = "box-container" @click.stop>
         <div class = "box-content">{{text}}</div>
@@ -32,5 +32,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../dialog.scss';
+  @import '../msgBox.scss';
 </style>

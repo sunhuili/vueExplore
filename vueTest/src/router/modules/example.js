@@ -5,14 +5,14 @@ export default [
     path: '/example',
     name: 'example',
     component: _import('layout/example'),
-    redirect: '/example/dialog',
+    redirect: '/example/msgBox',
     children: [
       {
-        path: 'dialog',
-        name: 'dialog',
-        component: _import('example/dialog'),
+        path: 'msgBox',
+        name: 'msgBox',
+        component: _import('example/msgBox'),
         meta: {
-          testName: 'dialog',
+          testName: 'msgBox',
         }
       },
       {

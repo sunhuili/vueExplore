@@ -1,10 +1,17 @@
 <template>
-  <div class="module-dialog">
+  <div class="module-msgBox">
     <div class="box-mask">
       <div class = "box-container">
         <div class = "box-content">{{text}}</div>
         <div class="box-bottom">
-          <img src="~static/images/loading.gif">
+          <div class="bottom-item"
+            @click="$emit('clickBtn','cancel')">
+            取消
+          </div>
+          <div class="bottom-item"
+            @click="$emit('clickBtn','ok')">
+            确认
+          </div>
         </div>
       </div>
     </div>
@@ -13,7 +20,7 @@
 
 <script>
   export default{
-    name: 'loading',
+    name: 'alert',
     props:{
       text: {
         type: String,
@@ -25,5 +32,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../dialog.scss';
+  @import '../msgBox.scss';
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="u-item"
-      v-for="item,key in dialogList"
-      @click="showDialog(key)">
+      v-for="item,key in msgBoxList"
+      @click="showmsgBox(key)">
       <div v-for="descInfo in item.desc">
         {{descInfo}}
       </div>
@@ -12,40 +12,40 @@
 
 <script>
   export default {
-    name: 'dialog',
+    name: 'msgBox',
     data() {
       return {
-        dialogList: {
+        msgBoxList: {
           alert: {
             text: 'alert弹框测试',
             desc: [
               'alert弹框',
-              '使用方式：{vm,exec} = this.$dialog.alert(text[,title])',
-              '关闭方式：this.$dialog.close(vm)、点击确认按钮',
+              '使用方式：{vm,exec} = this.$msgBox.alert(text[,title])',
+              '关闭方式：this.$msgBox.close(vm)、点击确认按钮',
             ],
           },
           confirm: {
             text: 'confirm确认框测试',
             desc: [
               'confirm确认框',
-              '使用方式：{vm,exec} = this.$dialog.confirm(text)',
-              '关闭方式：this.$dialog.close(vm)、点击确认/取消按钮',
+              '使用方式：{vm,exec} = this.$msgBox.confirm(text)',
+              '关闭方式：this.$msgBox.close(vm)、点击确认/取消按钮',
             ],
           },
           tip: {
             text: 'tip提示框测试',
             desc: [
               'tip提示框',
-              '使用方式：{vm,exec} = this.$dialog.tip(text[,time])',
-              '关闭方式：this.$dialog.close(vm)、超时、点击空白处',
+              '使用方式：{vm,exec} = this.$msgBox.tip(text[,time])',
+              '关闭方式：this.$msgBox.close(vm)、超时、点击空白处',
             ],
           },
           loading: {
             text: 'loading动画测试',
             desc: [
               'loading动画',
-              '使用方式：{vm,exec} = this.$dialog.loading([text])',
-              '关闭方式：this.$dialog.close(vm)',
+              '使用方式：{vm,exec} = this.$msgBox.loading([text])',
+              '关闭方式：this.$msgBox.close(vm)',
             ],
           },
           customBox: {
@@ -58,14 +58,14 @@
       }
     },
     methods: {
-      showDialog(key) {
-        let showText = this.dialogList[key].text;
+      showmsgBox(key) {
+        let showText = this.msgBoxList[key].text;
         switch(key) {
           case 'alert':
-            let alertBox = this.$dialog.alert(showText);
+            let alertBox = this.$msgBox.alert(showText);
             // // 1、测试代码关闭alert
             // setTimeout(()=>{
-            //  this.$dialog.close(alertBox.vm);
+            //  this.$msgBox.close(alertBox.vm);
             // },1000);
             // // 2、测试alert关闭事件结果
             // alertBox.exec.then(()=>{
@@ -73,10 +73,10 @@
             // })
             break;
           case 'confirm':
-            let confirmBox = this.$dialog.confirm(showText);
+            let confirmBox = this.$msgBox.confirm(showText);
             // // 1、测试代码关闭confirm
             // setTimeout(()=>{
-            //  this.$dialog.close(confirmBox.vm);
+            //  this.$msgBox.close(confirmBox.vm);
             // },1000);
             // // 2、测试alert关闭事件结果
             // confirmBox.exec.then(btnName=>{
@@ -84,10 +84,10 @@
             // });
             break;
           case 'tip':
-            let tipBox = this.$dialog.tip(showText,3);
+            let tipBox = this.$msgBox.tip(showText,3);
             // // 1、测试代码关闭tip
             // setTimeout(()=>{
-            //  this.$dialog.close(tipBox.vm);
+            //  this.$msgBox.close(tipBox.vm);
             // },1000);
             // // 2、测试tip关闭事件结果
             // tipBox.exec.then(()=>{
@@ -95,10 +95,10 @@
             // })
             break;
           case 'loading':
-            let loadingBox = this.$dialog.loading(showText);
+            let loadingBox = this.$msgBox.loading(showText);
             // // 1、测试代码关闭loading
             setTimeout(()=>{
-              this.$dialog.close(loadingBox.vm);
+              this.$msgBox.close(loadingBox.vm);
             },1000);
             // // 2、测试loading关闭事件结果
             // loadingBox.exec.then(()=>{
